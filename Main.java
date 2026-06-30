@@ -1,24 +1,16 @@
+// New class (HW2): entry point that exercises statement() and xmlStatement().
 public class Main {
-    public static void main(String[] args){
-        // create some movies
-        // create some customers
-        // create some rentals
-        Movie movie1 = new Movie("title1", PriceCode.REGULAR);
-        Movie movie2 = new Movie("title2", PriceCode.NEW_RELEASE);
-        Movie movie3 = new Movie("title3", PriceCode.CHILDRENS);
 
-        //
-        Customer customer = new Customer("Xiaokai");
+    public static void main(String[] args) {
+        Customer customer = new Customer("John Smith");
+        customer.addRental(new Rental(new RegularMovie("The Matrix"), 3));
+        customer.addRental(new Rental(new NewReleaseMovie("Independence Day"), 2));
+        customer.addRental(new Rental(new ChildrensMovie("Toy Story"), 5));
 
-        customer.addRental(new Rental(movie1, 3));
-        customer.addRental(new Rental(movie2, 2));
+        System.out.println("=== Text Statement ===");
+        System.out.println(customer.statement());
 
-        customer.addRental(new Rental(movie3, 10));
-
-        //
-        System.out.println("XML statement:");
+        System.out.println("\n=== XML Statement ===");
         System.out.println(customer.xmlStatement());
-
     }
-
 }
