@@ -1,26 +1,56 @@
-public class Movie { //data class: this class is just a data holder and does not have any behavior,
-    //they should not be defined constant  
-    public static final int CHILDRENS   = 2;
-    public static final int REGULAR     = 0;
-    public static final int NEW_RELEASE = 1;
+public class Movie {
+
+
+    private String title;
+    private PriceCode priceCode;
     
-    private String _title;
-    private int    _priceCode;
+
     
-    public Movie(String title, int priceCode) {
-        _title = title;
-        _priceCode = priceCode;
+    public Movie(String title, PriceCode priceCode) {
+        this.title = title;
+        this.priceCode = priceCode;
     }
     
-    public int getPriceCode() {
-        return _priceCode;
+    public PriceCode getPriceCode() {
+        return priceCode;
     }
     
-    public void setPriceCode(int arg) {
-        _priceCode = arg;
+    public void setPriceCode(PriceCode priceCode) {
+        this.priceCode = priceCode;
     }
     
     public String getTitle() {
-        return _title;
+        return title;
+    }
+
+    public double getCharge(int daysRented){
+        double charge = 0;
+        switch (priceCode) {
+            case REGULAR:
+                charge = 2;
+                if (daysRented > 2) {
+                    charge += (daysRented - 2) * 1.5;
+                }
+                break;
+            case NEW_RELEASE:
+                charge = daysRented * 3;
+                break;
+            case CHILDRENS:
+                charge += 1.5;
+                if (daysRented > 3) {
+                    charge = (daysRented - 3) * 1.5;
+                }
+            break;
+        }
+            return charge;
+
+    }
+
+
+public int getFrequentRenterPoints(int daysRented){
+            if (priceCode == PriceCode.NEW_RELEASE && daysRented >1){
+                return 2;
+            }
+            return 1;
     }
 }
